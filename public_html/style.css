@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 05-feb-2017, 19:50:24
+    Author     : BlackDev
+*/
+
+img 
+{
+width: 78%;
+ 
+  max-width: 78%;
+
+
+
+}
+@media (max-width: 767px) {
+    .affix {
+        position: static;
+    }
+}
+@media (min-width: 768px) {
+    .affix {
+        position: fixed;
+        
+    }
+}
