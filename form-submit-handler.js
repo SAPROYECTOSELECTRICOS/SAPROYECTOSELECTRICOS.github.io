@@ -1,105 +1,105 @@
-( función () {
-  // obtener todos los datos en forma y devolver el objeto
-  función  getFormData ( formulario ) {
-    elementos var =  forma . elementos ;
+(function() {
+  // get all data in form and return object
+  function getFormData(form) {
+    var elements = form.elements;
     var honeypot;
 
-    campos var =  objeto . claves (elementos). filtro ( función ( k ) {
-      if (elementos [k]. nombre  ===  " honeypot " ) {
-        honeypot = elementos [k]. valor ;
-        devuelve  falso ;
+    var fields = Object.keys(elements).filter(function(k) {
+      if (elements[k].name === "honeypot") {
+        honeypot = elements[k].value;
+        return false;
       }
-      volver  verdadero ;
-    }). mapa ( función ( k ) {
-      if (elementos [k]. nombre  ! ==  indefinido ) {
-        elementos de retorno [k]. nombre ;
-      // caso especial para la colección html de Edge
-      } else  if (elementos [k]. longitud  >  0 ) {
-        elementos de retorno [k]. artículo ( 0 ). nombre ;
+      return true;
+    }).map(function(k) {
+      if(elements[k].name !== undefined) {
+        return elements[k].name;
+      // special case for Edge's html collection
+      }else if(elements[k].length > 0){
+        return elements[k].item(0).name;
       }
-    }). filter ( function ( item , pos , self ) {
-      volver a  sí mismo . indexOf (item) == pos && item;
+    }).filter(function(item, pos, self) {
+      return self.indexOf(item) == pos && item;
     });
 
     var formData = {};
-    campos . forEach ( function ( name ) {
-      var elemento = elementos [nombre];
+    fields.forEach(function(name){
+      var element = elements[name];
       
-      // los elementos de forma singular solo tienen un valor
-      formData [nombre] =  elemento . valor ;
+      // singular form elements just have one value
+      formData[name] = element.value;
 
-      // cuando nuestro elemento tiene varios elementos, obtenga sus valores
-      if ( elemento . longitud ) {
-        datos var = [];
-        para ( var i =  0 ; i <  elemento . longitud ; i ++ ) {
-          var item =  elemento . ítem (i);
-          if ( elemento . verificado  ||  elemento . seleccionado ) {
-            los datos . empuje ( ítem . valor );
+      // when our element has multiple items, get their values
+      if (element.length) {
+        var data = [];
+        for (var i = 0; i < element.length; i++) {
+          var item = element.item(i);
+          if (item.checked || item.selected) {
+            data.push(item.value);
           }
         }
-        formData [nombre] =  datos . unirse ( ' , ' );
+        formData[name] = data.join(', ');
       }
     });
 
-    // agrega valores específicos del formulario a los datos
-    formData . formDataNameOrder  =  JSON . stringify (campos);
-    formData . formGoogleSheetName  =  formulario . conjunto de datos . hoja  ||  " respuestas " ; // nombre de hoja predeterminado
-    formData . formGoogleSend
-      =  forma . conjunto de datos . correo electrónico  ||  " " ; // no hay correo electrónico por defecto
+    // add form-specific values into the data
+    formData.formDataNameOrder = JSON.stringify(fields);
+    formData.formGoogleSheetName = form.dataset.sheet || "responses"; // default sheet name
+    formData.formGoogleSend
+      = form.dataset.email || ""; // no email by default
 
-    return {data : formData, honeypot : honeypot};
+    return {data: formData, honeypot: honeypot};
   }
 
-  function  handleFormSubmit ( event ) {   // maneja el envío del formulario sin jquery
-    evento . preventDefault ();           // enviamos a través de xhr a continuación
-    var forma =  evento . objetivo ;
-    var formData =  getFormData (formulario);
-    var data =  formData . datos ;
+  function handleFormSubmit(event) {  // handles form submit without any jquery
+    event.preventDefault();           // we are submitting via xhr below
+    var form = event.target;
+    var formData = getFormData(form);
+    var data = formData.data;
 
-    // Si se llena un campo honeypot, suponga que lo hizo un bot de spam.
-    if ( formData . honeypot ) {
-      devuelve  falso ;
+    // If a honeypot field is filled, assume it was done so by a spam bot.
+    if (formData.honeypot) {
+      return false;
     }
 
-    disableAllButtons (formulario);
-    var url =  forma . la acción ;
-    var xhr =  new  XMLHttpRequest ();
-    xhr . abierto ( ' POST ' , url);
+    disableAllButtons(form);
+    var url = form.action;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
     // xhr.withCredentials = true;
-    xhr . setRequestHeader ( " Content-Type " , " application / x-www-form-urlencoded " );
-    xhr . onreadystatechange  =  function () {
-        if ( xhr . readyState  ===  4  &&  xhr . status  ===  200 ) {
-          formulario . restablecer ();
-          var formElements =  formulario . querySelector ( " .form-elements " )
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          form.reset();
+          var formElements = form.querySelector(".form-elements")
           if (formElements) {
-            formElements . estilo . display  =  " none " ; // ocultar formulario
+            formElements.style.display = "none"; // hide form
           }
-          var thankYouMessage =  formulario . querySelector ( " .thankyou_message " );
+          var thankYouMessage = form.querySelector(".thankyou_message");
           if (thankYouMessage) {
-            gracias . estilo . display  =  " bloque " ;
+            thankYouMessage.style.display = "block";
           }
         }
     };
-    // url codifica datos de formulario para enviar como datos de publicación
-    var codificado =  Objeto . claves (datos). mapa ( función ( k ) {
-        return  encodeURIComponent (k) +  " = "  +  encodeURIComponent (datos [k]);
-    }). unirse ( ' & ' );
-    xhr . enviar (codificado);
+    // url encode form data for sending as post data
+    var encoded = Object.keys(data).map(function(k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+    }).join('&');
+    xhr.send(encoded);
   }
   
-  función  cargada () {
-    // enlaza al evento de envío de nuestro formulario
-    var formas =  documento . querySelectorAll ( " form.gform " );
-    for ( var i =  0 ; i <  formas . longitud ; i ++ ) {
-      formas [i]. addEventListener ( " submit " , handleFormSubmit, false );
+  function loaded() {
+    // bind to the submit event of our form
+    var forms = document.querySelectorAll("form.gform");
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener("submit", handleFormSubmit, false);
     }
   };
-  documento . addEventListener ( " DOMContentLoaded " , cargado, falso );
+  document.addEventListener("DOMContentLoaded", loaded, false);
 
-  función  disableAllButtons ( formulario ) {
-    botones var =  forma . querySelectorAll ( " botón " );
-    para ( var i =  0 ; i <  botones . longitud ; i ++ ) {
-      botones [i]. deshabilitado  =  verdadero ;
+  function disableAllButtons(form) {
+    var buttons = form.querySelectorAll("button");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
     }
   }
-}) ();
+})();
