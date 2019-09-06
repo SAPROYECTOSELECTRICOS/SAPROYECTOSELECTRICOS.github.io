@@ -16,18 +16,11 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-       <style>
+        <style>
             body {
                 padding-top: 20px;
                 padding-bottom: 20px;
             }
-
-          #send{
-                background-color: #0B7FF3;             
-          }
-          #send:hover{
-                background-color:rgb(13,71,161);
-                    }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
@@ -52,7 +45,6 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
         <script src="js/vendor/bootstrap.js"></script>
 
         <script type="text/javascript">
-
             $(document).ready(function () {
                 $('[data-toggle="popover"]').popover({html: true});
             });
@@ -68,7 +60,6 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
                      top: 0;
                      bottom: 0;
                      left: 0;
-
                      padding: 3rem 2rem;"> 
 
 
@@ -101,7 +92,6 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
                      top: 0;
                      bottom: 0;
                      left: 0;
-
                      padding: 3rem 2rem;"> 
 
 
@@ -114,7 +104,6 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
                 <div class="col-sm-8 center-block" style=";
                      margin-left: 8%;
                      padding-right: 3%;
-
                      ">
 
 
@@ -864,9 +853,9 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
 
 <form action="https://script.google.com/macros/s/AKfycbyAUrN__F2zkKb2UhG29NmNzDiwTHatNBs3brBghYHC0iDM9D5y/exec" style="font-family:'Roboto', sans-serif; width:400px; float:left;" class="gform" method="POST">
              
-             <div style="display: block;" class="thankyou_message">
+             <div style="display:none" class="thankyou_message">
              <!-- You can customize the thankyou message by editing the code below -->
-             <h2 style="font-size:1em;">¡<em>Gracias</em> por contactarnos! ya te responderemos en la brevedad posible. 
+             <h2>¡<em>Gracias</em> por contactarnos! ya te responderemos en la brevedad posible. 
              </h2>
              </div>
                
@@ -877,9 +866,9 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
                        <label name="E-mail" title="E-mail" style="display:block; margin-top:1.5em;">Consulta :</label>
                </div>
                <div>
-                       <input name="email" style=" color:black; width:198px;">
+                       <input name="email" style=" color:black;">
                        <textarea name="message" style="width: 198px; height: 146px; margin-top: 10px; color: black;"></textarea>
-                       <input type="submit" value="Send" style="display:block; margin:10px 0 0 220px;font-weight:bold" id="send">
+                       <input type="submit" value="Send" style="display:block; margin:10px 0 0 240px; background:#0D47A1; font-weight:bold">
               </div>
 </form>
 
@@ -910,47 +899,36 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
                 </div> <!-- /container -->
 
                 <script type="text/javascript">
-
                     $("#service").on("click", function () {
-
                         var posicion = $("#SERVICIO").offset().top;
                         $("html, body").animate({
                             scrollTop: posicion
                         }, 900);
                     });
-
                     $("#entre").on("click", function () {
-
                         var posicion = $("#ENTREGA").offset().top;
                         $("html, body").animate({
                             scrollTop: posicion
                         }, 900);
                     });
-
                     $("#insta").on("click", function () {
-
                         var posicion = $("#INSTALACION").offset().top;
                         $("html, body").animate({
                             scrollTop: posicion
                         }, 900);
                     });
-
                     $("#clien").on("click", function () {
-
                         var posicion = $("#CLIENTE").offset().top;
                         $("html, body").animate({
                             scrollTop: posicion
                         }, 900);
                     });
-
                     $("#conta").on("click", function () {
-
                         var posicion = $("#CONTACTO").offset().top;
                         $("html, body").animate({
                             scrollTop: posicion
                         }, 900);
                     });
-
                 </script>
                 <script>
                     (function (i, s, o, g, r, a, m) {
@@ -964,10 +942,8 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
                         a.src = g;
                         m.parentNode.insertBefore(a, m)
                     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
                     ga('create', 'UA-45775447-1', 'auto');
                     ga('send', 'pageview');
-
                 </script>
                 <!-- FOOTER -->
             </div>
