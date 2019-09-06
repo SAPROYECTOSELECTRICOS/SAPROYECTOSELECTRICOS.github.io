@@ -16,11 +16,18 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <style>
+       <style>
             body {
                 padding-top: 20px;
                 padding-bottom: 20px;
             }
+
+          #send{
+                background-color: #0B7FF3;             
+          }
+          #send:hover{
+                background-color:rgb(13,71,161);
+                    }
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
@@ -857,9 +864,9 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
 
 <form action="https://script.google.com/macros/s/AKfycbyAUrN__F2zkKb2UhG29NmNzDiwTHatNBs3brBghYHC0iDM9D5y/exec" style="font-family:'Roboto', sans-serif; width:400px; float:left;" class="gform" method="POST">
              
-             <div style="display:none" class="thankyou_message">
+             <div style="display: block;" class="thankyou_message">
              <!-- You can customize the thankyou message by editing the code below -->
-             <h2>¡<em>Gracias</em> por contactarnos! ya te responderemos en la brevedad posible. 
+             <h2 style="font-size:1em;">¡<em>Gracias</em> por contactarnos! ya te responderemos en la brevedad posible. 
              </h2>
              </div>
                
@@ -870,9 +877,9 @@ Altamente especializado en el ramo ofrece la elaboración y ejecución de Proyec
                        <label name="E-mail" title="E-mail" style="display:block; margin-top:1.5em;">Consulta :</label>
                </div>
                <div>
-                       <input name="email" style=" color:black;">
+                       <input name="email" style=" color:black; width:198px;">
                        <textarea name="message" style="width: 198px; height: 146px; margin-top: 10px; color: black;"></textarea>
-                       <input type="submit" value="Send" style="display:block; margin:10px 0 0 240px; background:#0D47A1; font-weight:bold">
+                       <input type="submit" value="Send" style="display:block; margin:10px 0 0 220px;font-weight:bold" id="send">
               </div>
 </form>
 
